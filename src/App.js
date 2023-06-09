@@ -22,7 +22,7 @@ import NotFound from "./component/layout/Not Found/NotFound";
 import Contact from "./component/layout/Contact/Contact";
 import MyOrders from "./component/Order/MyOrder.jsx"
 import Home from "./component/Home/Home";
-// import Product from "./component/Home/ProductCard";
+import Product from "./component/Home/ProductCard";
 import Loader from "./component/layout/Loader/Loader";
 const  App=()=> {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -51,7 +51,8 @@ const  App=()=> {
        <Route  path="/about" element={<About />} /> 
        <Route  path="/notfound" element={<NotFound />} /> 
        <Route  path="/contact" element={<Contact />} /> 
-       {/* <Route  path="/product" element={<Product />} />  */}
+       <Route  path="/dashboard" element={<Contact />} /> 
+       <Route  path="/product" element={<Product />} /> 
        <Route path='/loader' element={<Loader />} /> 
        
        <Route path="/login" element={<LoginSignup/>} />

@@ -30,7 +30,7 @@ import {
           dispatch({ type: LOGIN_REQUEST });
       
           const config = { headers: { "Content-Type": "application/json" } };
-      
+         console.log(email,password, 'data')
           const { data } = await axios.post(
             `http://192.168.1.69:8080/api/users/login`,
             { email, password },
@@ -38,6 +38,7 @@ import {
           );
       
           dispatch({ type: LOGIN_SUCCESS, payload: data.user });
+          console.log(data.token)
         } catch (error) {
           dispatch({ type: LOGIN_FAIL, payload: error.response.data.message });
         }

@@ -9,7 +9,7 @@ const Product = ({product}) => {
     edit :false,
     color:'rgba(20,20,20,0.1)',
     activeColor:'tomato',
-    // value:product.rating,
+    value:product.rating,
     size:window.innerWidth <600?20:25,
     isHalf:true,
 

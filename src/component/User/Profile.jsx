@@ -1,18 +1,19 @@
 
 import Loader from "../layout/Loader/Loader"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, {useEffect} from "react";
 import MetaData from "../layout/MetaData.jsx";
 import { useSelector } from "react-redux";
 import "./Profile.css";
 
-const Profile = ({ navigate }) => {
-   
+const Profile = () => {
+   const navigate = useNavigate();
         const { user, loading, isAuthenticated } = useSelector((state) => state.user);
-      
+      console.log(user,isAuthenticated,"user")
+
         useEffect(() => {
           if (isAuthenticated === false) {
-            navigate.push("/login");
+            navigate("/login");
           }
         }, [navigate, isAuthenticated]);
   return (
