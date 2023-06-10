@@ -37,6 +37,9 @@ import {
             config
           );
       
+  // Store the token in local storage
+          localStorage.setItem('token', data.token);
+          
           dispatch({ type: LOGIN_SUCCESS, payload: data.user });
           console.log(data.token)
         } catch (error) {

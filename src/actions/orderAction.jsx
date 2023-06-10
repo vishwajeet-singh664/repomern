@@ -21,7 +21,7 @@ import {
   } from "../constants/orderConstants";
   
   import axios from "axios";
-  
+  const token=localStorage.getItem('token')
   // Create Order
   export const createOrder = (order) => async (dispatch) => {
     try {
@@ -32,7 +32,11 @@ import {
           "Content-Type": "application/json",
         },
       };
-      const { data } = await axios.post("http://192.168.1.69:8080/api/orders/new", order, config);
+      const { data } = await axios.post("http://192.168.1.69:8080/api/orders/new", order, {
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      });
   
       dispatch({ type: CREATE_ORDER_SUCCESS, payload: data });
     } catch (error) {
@@ -48,7 +52,11 @@ import {
     try {
       dispatch({ type: MY_ORDERS_REQUEST });
   
-      const { data } = await axios.get("http://192.168.1.69:8080/api/orders/me");
+      const { data } = await axios.get("http://192.168.1.69:8080/api/orders/me",{
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      });
   
       dispatch({ type: MY_ORDERS_SUCCESS, payload: data.orders });
     } catch (error) {
@@ -63,8 +71,12 @@ import {
   export const getAllOrders = () => async (dispatch) => {
     try {
       dispatch({ type: ALL_ORDERS_REQUEST });
-  
-      const { data } = await axios.get("http://192.168.1.69:8080/api/orders/admin");
+
+      const { data } = await axios.get("http://192.168.1.69:8080/api/orders/admin", {
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      });
   
       dispatch({ type: ALL_ORDERS_SUCCESS, payload: data.orders });
     } catch (error) {
@@ -88,7 +100,11 @@ import {
       const { data } = await axios.put(
         `http://192.168.1.69:8080/api/orders/admin/${id}`,
         order,
-        config
+        {
+          headers:{
+            Authorization: `Bearer ${token}`
+          }
+        }
       );
   
       dispatch({ type: UPDATE_ORDER_SUCCESS, payload: data.success });
@@ -105,7 +121,11 @@ import {
     try {
       dispatch({ type: DELETE_ORDER_REQUEST });
   
-      const { data } = await axios.delete(`http://192.168.1.69:8080/api/orders/admin/${id}`);
+      const { data } = await axios.delete(`http://192.168.1.69:8080/api/orders/admin/${id}`,{
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      });
   
       dispatch({ type: DELETE_ORDER_SUCCESS, payload: data.success });
     } catch (error) {
@@ -121,7 +141,11 @@ import {
     try {
       dispatch({ type: ORDER_DETAILS_REQUEST });
   
-      const { data } = await axios.get(`http://192.168.1.69:8080/api/orders/${id}`);
+      const { data } = await axios.get(`http://192.168.1.69:8080/api/orders/${id}`,{
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      });
   
       dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data.order });
     } catch (error) {

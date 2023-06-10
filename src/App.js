@@ -24,6 +24,7 @@ import MyOrders from "./component/Order/MyOrder.jsx"
 import Home from "./component/Home/Home";
 import Product from "./component/Home/ProductCard";
 import Loader from "./component/layout/Loader/Loader";
+import OrderDetails from "./component/Order/orderDetails";
 const  App=()=> {
   const { isAuthenticated, user } = useSelector((state) => state.user);
 
@@ -60,13 +61,14 @@ const  App=()=> {
       
        <Route path="/account" element={<Profile/>} />
        <Route path="/shipping" element={<Shipping/>} />
-       {/* <Route path="/order/confirm" element={<ConfirmOrder/>} /> */}
+       <Route path="/order/confirm" element={<ConfirmOrder/>} />
        {/* <ProtectedRoute path="/me/update" element={<UpdateProfile/>} /> */}
        <Route  path="/success" element={<OrderSuccess/>} />
 
        {/* <Route path="/useroption" element={<UserOptions/>} /> */}
 
        {/* <Route path='/product/:id' element={<ProductDetails />} />  */}
+       <Route path="/order/:id" element={<OrderDetails />} />
        </Routes>
       </Router> 
     

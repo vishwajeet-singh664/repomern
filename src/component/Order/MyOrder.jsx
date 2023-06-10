@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import MetaData from "../layout/MetaData";
 import LaunchIcon from "@mui/icons-material/Launch";
 
-const MyOrders = () => {
+export const MyOrders = () => {
   const dispatch = useDispatch();
 
   const { loading, error, orders } = useSelector((state) => state.myOrders);
@@ -22,9 +22,8 @@ const MyOrders = () => {
       minWidth: 150,
       flex: 0.5,
       cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
-          ? "greenColor"
-          : "redColor";
+        const status = params.row.status; // Access the 'status' field from the row
+        return status === "Delivered" ? "greenColor" : "redColor";
       },
     },
     {
@@ -49,8 +48,9 @@ const MyOrders = () => {
       type: "number",
       sortable: false,
       renderCell: (params) => {
+        const orderId = params.id; 
         return (
-          <Link to={`/order/${params.getValue(params.id, "id")}`}>
+          <Link to={`/order/${orderId}`}>
             <LaunchIcon />
           </Link>
         );
@@ -67,7 +67,7 @@ const MyOrders = () => {
 
   useEffect(() => {
     dispatch(myOrders());
-  }, [dispatch]);
+  }, [dispatch, myOrders]);
 
   return (
     <Fragment>
@@ -86,7 +86,9 @@ const MyOrders = () => {
             autoHeight
           />
 
-          <Typography id="myOrdersHeading">{user.name}'s Orders</Typography>
+          <Typography variant="h1" id="myOrdersHeading">
+            {user.name}
+          </Typography>
         </div>
       )}
     </Fragment>
